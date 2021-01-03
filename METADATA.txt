@@ -1,0 +1,52 @@
+edag project creates components on the go, immedietly and only when they are called.
+
+That is nice because of flexibility, but doesn't provide good insight to
+available parts. Hard to list or browser them, or see variants,
+parameters, etc.
+
+A current convention is to have some standard argument to functions creating
+these parts. I.e. type annotations on function argument, to indicate
+package, nets, etc.
+
+However, some parts are more complex:
+
+* They are part of a series, with dozens of parts.
+
+* They might be available in few or dozen packages.
+
+* The pin numbers might map differently on each package. I.e. v_in on
+SOIC-8 might be pin 1, but v_in on SOT-23-6 might be pin 3.
+
+* In fact some parts can come with same package but different pin maps,
+as they are replacement of some other parts. I.e. some voltage references
+come in 4 variants of SOT-23-6, with different permutation of pin
+assignments, or some pins not exposed externally. They might even be
+using different die, or die orientation internally.
+
+Ordering numbers and markings are even more complex. Ordering numbers
+from manufacturer might depend on a model, variant, package, temperature
+range, quality grade, type of packaging (tape, real, bulk), or even
+revision, or certification method.
+
+And then we have numbers provided by distributors, like DigiKey, Mouser,
+LCSC, JCLPCB / EasyEDA, etc. Some of them might just have a single number
+for a part, some might many additional variants, depending on a type of
+package (cut tape, digi-reel, tape & reel, etc), some might depend on
+ordered quantity.
+
+
+We might want to be able to use different footprint variants for some
+parts:
+
+* For example we might want almost all SMD 0603 parts to be as small as
+possible, and use standard dense footprint variant, with exception of
+lets say a fuse, which we might want to be able to hand solder easily.
+
+* Or we want all SMD IC footprints to be small, with exception of one part
+that will be soldered manually, i.e. because we want to try different
+chips, chip lots, or it is a part that can't be ordered (now or anymore)
+by the assembly shop, so 95% of parts is machine assembled, but few are
+hand soldered.
+
+So, we might want to be able to specify manually footprint variants
+for some parts.
